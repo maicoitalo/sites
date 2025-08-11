@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualização de Estoque - Revemar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 40px;
+            color: white;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-box h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .info-box ul {
+            list-style: none;
+            text-align: left;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .info-box li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        .btn-update {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-update:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-update:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 40px;
+            color: white;
+        }
+
+        .modal h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .modal p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .info-time {
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            font-size: 18px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .btn-close {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .last-update {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🚗</div>
+        
+        <h1>Atualização de Estoque</h1>
+        
+        <p class="description">
+            Sistema de sincronização do catálogo de veículos Revemar
+        </p>
+
+        <div class="info-box">
+            <h3>O que será atualizado:</h3>
+            <ul>
+                <li>Catálogo completo de veículos</li>
+                <li>Preços e informações técnicas</li>
+                <li>Disponibilidade em estoque</li>
+                <li>Dados sincronizados do sistema AG</li>
+            </ul>
+        </div>
+
+        <button class="btn-update" id="updateBtn" onclick="updateStock()">
+            <span id="btnText">Atualizar Estoque</span>
+        </button>
+
+        <div class="last-update">
+            <strong>Atualização automática:</strong> Todos os dias às 02:00
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">✓</div>
+            <h2>Atualização Iniciada!</h2>
+            <p>O processo de sincronização do estoque foi iniciado com sucesso.</p>
+            
+            <div class="info-time">
+                ⏱️ Tempo estimado: 4 minutos
+            </div>
+            
+            <p style="font-size: 14px; color: #999;">
+                O estoque será atualizado automaticamente.<br>
+                Você pode fechar esta janela.
+            </p>
+            
+            <button class="btn-close" onclick="closeModal()">Entendido</button>
+        </div>
+    </div>
+
+    <script>
+        let isUpdating = false;
+
+        async function updateStock() {
+            if (isUpdating) return;
+            
+            isUpdating = true;
+            const btn = document.getElementById('updateBtn');
+            const btnText = document.getElementById('btnText');
+            
+            // Desabilita o botão e mostra loading
+            btn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span>Processando...';
+            
+            try {
+                // Faz POST para o webhook de atualização
+                const response = await fetch('https://webhook.dev.luminarisepro.com/webhook/atualiza-estoque', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'update_stock',
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                
+                if (response.ok) {
+                    // Mostra o modal de sucesso
+                    document.getElementById('modal').style.display = 'block';
+                    btnText.textContent = 'Atualizar Estoque';
+                    
+                    // Reabilita o botão após 5 minutos
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        isUpdating = false;
+                    }, 300000);
+                } else {
+                    throw new Error('Erro no servidor');
+                }
+                
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('❌ Erro ao iniciar atualização. Por favor, tente novamente.');
+                btn.disabled = false;
+                btnText.textContent = 'Atualizar Estoque';
+                isUpdating = false;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Fecha o modal ao clicar fora dele
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Adiciona data/hora atual ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            const lastUpdate = document.querySelector('.last-update');
+            const now = new Date();
+            const timeString = now.toLocaleString('pt-BR', { 
+                timeZone: 'America/Sao_Paulo',
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            lastUpdate.innerHTML += `<br><small>Página carregada em: ${timeString}</small>`;
+        });
+    </script>
+</body>
+</html>
