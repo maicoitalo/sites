@@ -1,365 +1,899 @@
-<!DOCTYPE html>
+// Gerar HTML completo da landing page com correções aplicadas
+const html = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualização de Estoque - Revemar</title>
+    <title>Transforme Seu Atendimento com Inteligência Artificial</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .logo {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 40px;
-            color: white;
-        }
-
-        h1 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #ffffff;
             color: #333;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-
-        .description {
-            color: #666;
-            font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 30px;
         }
-
-        .info-box {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-left: 4px solid #667eea;
-        }
-
-        .info-box h3 {
-            color: #333;
-            font-size: 16px;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-
-        .info-box ul {
-            list-style: none;
-            text-align: left;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .info-box li {
-            padding: 5px 0;
-            padding-left: 20px;
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #b68d7f 0%, #d4a5a5 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
             position: relative;
         }
-
-        .info-box li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
+        
+        .hero-section h1 {
+            font-size: 3em;
+            font-weight: 300;
+            margin-bottom: 20px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.2;
         }
-
-        .btn-update {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        
+        .hero-section p {
+            font-size: 1.3em;
+            font-weight: 300;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
         }
-
-        .btn-update:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
-
-        .btn-update:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
+        
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 300;
         }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Calculator Form */
+        .calculator-form {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            padding: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .form-section {
+            background: #faf8f6;
+            padding: 30px;
+            border-radius: 15px;
+        }
+        
+        .form-section h3 {
+            color: #b68d7f;
+            font-size: 1.3em;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.3s ease;
+            padding: 14px 18px;
+            border: 1px solid #e0d5d0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
         }
-
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #b68d7f;
+            box-shadow: 0 0 0 3px rgba(182, 141, 127, 0.1);
+        }
+        
+        .form-group input[readonly] {
+            background: #e8f5e9;
+            border-color: #81c784;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        /* Comparison Section */
+        .comparison-section {
+            margin-bottom: 60px;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .comparison-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card-traditional {
+            border-top: 4px solid #ef5350;
+        }
+        
+        .card-ai {
+            border-top: 4px solid #66bb6a;
+            background: linear-gradient(to bottom, #f1f8e9 0%, #ffffff 100%);
+        }
+        
+        .recommended-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .comparison-card h4 {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .metric-value {
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+        
+        .value-negative {
+            color: #ef5350;
+        }
+        
+        .value-positive {
+            color: #66bb6a;
+        }
+        
+        /* Results Section */
+        .results-section {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            border-radius: 20px;
+            padding: 60px;
+            color: white;
+            margin-bottom: 60px;
+        }
+        
+        .results-section h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .results-section .subtitle {
+            text-align: center;
+            opacity: 0.9;
+            font-size: 1.1em;
+            margin-bottom: 50px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .result-column {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
             padding: 40px;
             border-radius: 20px;
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-            animation: slideIn 0.3s ease;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-
-        .modal-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #4caf50, #45a049);
-            border-radius: 50%;
+        
+        .result-column h3 {
+            font-size: 1.6em;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        
+        .result-item {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .result-item.highlight {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        
+        .result-label {
+            font-size: 1em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .result-value {
+            font-size: 2.8em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .result-description {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .result-comparison {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 40px;
-            color: white;
+            gap: 8px;
+            margin-top: 10px;
+            font-size: 1.1em;
+            font-weight: 500;
         }
-
-        .modal h2 {
+        
+        .result-comparison .icon {
+            font-size: 1.2em;
+        }
+        
+        .comparison-positive {
+            color: #86efac;
+        }
+        
+        .comparison-negative {
+            color: #fca5a5;
+        }
+        
+        /* Economy Section */
+        .economy-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            margin-bottom: 60px;
+        }
+        
+        .economy-section h2 {
+            font-size: 2.2em;
             color: #333;
-            margin-bottom: 20px;
-            font-size: 26px;
-        }
-
-        .modal p {
-            color: #666;
-            margin-bottom: 25px;
-            line-height: 1.6;
-            font-size: 16px;
-        }
-
-        .info-time {
-            background: #f0f4ff;
-            border: 2px solid #667eea;
-            padding: 20px;
-            border-radius: 15px;
             margin-bottom: 30px;
-            font-size: 18px;
-            color: #667eea;
-            font-weight: 600;
+            font-weight: 300;
         }
-
-        .btn-close {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 16px;
+        
+        .economy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .economy-item {
+            padding: 30px;
+            background: #f8f5f3;
+            border-radius: 15px;
+        }
+        
+        .economy-value {
+            font-size: 2.5em;
+            color: #4caf50;
             font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .economy-label {
+            color: #666;
+            font-size: 1em;
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            background: #f8f5f3;
+            padding: 60px 20px;
+            margin-bottom: 60px;
+        }
+        
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-title {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .benefit-description {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #b68d7f 0%, #d4a5a5 100%);
+            color: white;
+            padding: 20px 60px;
+            border: none;
             border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(182, 141, 127, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-
-        .btn-close:hover {
-            background: #5a67d8;
-            transform: translateY(-1px);
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(182, 141, 127, 0.4);
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
+        
+        /* Mobile Specific Fixes */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2em;
             }
-            to {
-                transform: translateY(0);
-                opacity: 1;
+            
+            .hero-section p {
+                font-size: 1.1em;
             }
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .last-update {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            color: #999;
-            font-size: 12px;
+            
+            .calculator-form {
+                padding: 30px 20px;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-section {
+                padding: 30px 15px;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-column {
+                padding: 30px 20px;
+            }
+            
+            .result-column h3 {
+                font-size: 1.3em;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            .result-item {
+                padding: 20px 15px;
+                margin-bottom: 15px;
+            }
+            
+            .result-value {
+                font-size: 2em;
+                word-break: break-word;
+                line-height: 1.2;
+            }
+            
+            .result-label {
+                font-size: 0.9em;
+            }
+            
+            .result-description {
+                font-size: 0.85em;
+            }
+            
+            .result-comparison {
+                font-size: 0.9em;
+                margin-top: 8px;
+            }
+            
+            .economy-section {
+                padding: 40px 20px;
+            }
+            
+            .economy-grid {
+                gap: 20px;
+            }
+            
+            .economy-value {
+                font-size: 1.8em;
+            }
+            
+            .economy-label {
+                font-size: 0.9em;
+            }
+            
+            .benefits-grid {
+                gap: 20px;
+            }
+            
+            .benefit-card {
+                padding: 25px 20px;
+            }
+            
+            .cta-button {
+                width: 90%;
+                max-width: 300px;
+                padding: 15px 20px;
+                font-size: 1em;
+            }
+            
+            /* Fix form inputs on mobile */
+            .form-group input {
+                font-size: 16px;
+                padding: 12px 15px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Transforme Seu Atendimento com Inteligência Artificial</h1>
+        <p>Descubra como sua clínica de estética pode multiplicar resultados e reduzir custos com atendimento automatizado 24/7</p>
+    </section>
+    
+    <!-- Main Content -->
     <div class="container">
-        <div class="logo">🚗</div>
+        <h2 class="section-title">Calculadora de ROI Personalizada</h2>
+        <p class="section-subtitle">Insira os dados da sua clínica e veja o potencial de crescimento com nossa IA especializada em estética</p>
         
-        <h1>Atualização de Estoque</h1>
-        
-        <p class="description">
-            Sistema de sincronização do catálogo de veículos Revemar
-        </p>
-
-        <div class="info-box">
-            <h3>O que será atualizado:</h3>
-            <ul>
-                <li>Catálogo completo de veículos</li>
-                <li>Preços e informações técnicas</li>
-                <li>Disponibilidade em estoque</li>
-                <li>Dados sincronizados do sistema AG</li>
-            </ul>
-        </div>
-
-        <button class="btn-update" id="updateBtn" onclick="updateStock()">
-            <span id="btnText">Atualizar Estoque</span>
-        </button>
-
-        <div class="last-update">
-            <strong>Atualização automática:</strong> Todos os dias às 02:00
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-icon">✓</div>
-            <h2>Atualização Iniciada!</h2>
-            <p>O processo de sincronização do estoque foi iniciado com sucesso.</p>
-            
-            <div class="info-time">
-                ⏱️ Tempo estimado: 4 minutos
+        <!-- Calculator Form -->
+        <div class="calculator-form">
+            <div class="form-grid">
+                <div class="form-section">
+                    <h3>📊 Dados da Sua Clínica</h3>
+                    <div class="form-group">
+                        <label for="contatos">Contatos recebidos por mês:</label>
+                        <input type="number" id="contatos" value="500" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="atendentes">Número de atendentes:</label>
+                        <input type="number" id="atendentes" value="1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="valor-agendamento">Valor por agendamento (R$):</label>
+                        <input type="number" id="valor-agendamento" value="150" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="valor-procedimento">Ticket médio por procedimento (R$):</label>
+                        <input type="number" id="valor-procedimento" value="1500" min="0">
+                    </div>
+                    <input type="hidden" id="taxa-fechamento" value="50">
+                </div>
+                
+                <div class="form-section">
+                    <h3>💰 Custos Mensais</h3>
+                    <div class="form-group">
+                        <label for="custo-atendente">Custo por atendente (salário + encargos):</label>
+                        <input type="number" id="custo-atendente" value="2600" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="custo-ia">Investimento em IAmatik:</label>
+                        <input type="number" id="custo-ia" value="1500" min="0" readonly>
+                    </div>
+                </div>
             </div>
+        </div>
+        
+        <!-- Comparison Section -->
+        <div class="comparison-section">
+            <h2 class="section-title">Comparativo de Resultados</h2>
+            <div class="comparison-grid">
+                <div class="comparison-card card-traditional">
+                    <h4>👤 Atendimento Tradicional</h4>
+                    <div class="metric-item">
+                        <span class="metric-label">Total de contatos/mês:</span>
+                        <span class="metric-value value-negative" id="total-contatos-trad">500</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Horário de trabalho:</span>
+                        <span class="metric-value value-negative">8h/dia</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Contatos aquecidos:</span>
+                        <span class="metric-value value-negative" id="contatos-aquecidos-trad">50</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Taxa de aquecimento:</span>
+                        <span class="metric-value value-negative">10%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Taxa de conversão:</span>
+                        <span class="metric-value value-negative" id="taxa-conversao-trad">2,8%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Agendamentos/mês:</span>
+                        <span class="metric-value value-negative" id="agendamentos-trad">14</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Vendas efetivas:</span>
+                        <span class="metric-value value-negative" id="vendas-trad">7</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Follow-up automático:</span>
+                        <span class="metric-value value-negative">❌ Não</span>
+                    </div>
+                </div>
+                
+                <div class="comparison-card card-ai">
+                    <span class="recommended-badge">Recomendado</span>
+                    <h4>🤖 IAmatik</h4>
+                    <div class="metric-item">
+                        <span class="metric-label">Total de contatos/mês:</span>
+                        <span class="metric-value value-positive" id="total-contatos-ia">500</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Horário de trabalho:</span>
+                        <span class="metric-value value-positive">24/7</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Contatos aquecidos:</span>
+                        <span class="metric-value value-positive" id="contatos-aquecidos-ia">300</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Taxa de aquecimento:</span>
+                        <span class="metric-value value-positive">60%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Taxa de conversão:</span>
+                        <span class="metric-value value-positive" id="taxa-conversao-ia">17,2%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Agendamentos/mês:</span>
+                        <span class="metric-value value-positive" id="agendamentos-ia">86</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Vendas efetivas:</span>
+                        <span class="metric-value value-positive" id="vendas-ia">43</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Follow-up automático:</span>
+                        <span class="metric-value value-positive">✅ Sim</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results-section">
+            <h2>💰 Análise Comparativa de Resultados</h2>
+            <p class="subtitle">Comparativo mensal detalhado entre Atendente Tradicional vs IA</p>
             
-            <p style="font-size: 14px; color: #999;">
-                O estoque será atualizado automaticamente.<br>
-                Você pode fechar esta janela.
-            </p>
-            
-            <button class="btn-close" onclick="closeModal()">Entendido</button>
+            <div class="results-grid">
+                <div class="result-column">
+                    <h3>👤 Atendente Tradicional</h3>
+                    
+                    <div class="result-item">
+                        <div class="result-label">Faturamento Bruto</div>
+                        <div class="result-value" id="faturamento-trad">R$ 10.500</div>
+                        <div class="result-description">Vendas realizadas no mês</div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">(-) Custo com Salário</div>
+                        <div class="result-value" style="color: #fca5a5;" id="custo-trad">R$ 2.600</div>
+                        <div class="result-description">Salário + encargos</div>
+                    </div>
+                    
+                    <div class="result-item highlight">
+                        <div class="result-label">(=) Lucro Líquido</div>
+                        <div class="result-value" id="lucro-trad">R$ 7.900</div>
+                        <div class="result-description">Resultado final</div>
+                    </div>
+                </div>
+                
+                <div class="result-column">
+                    <h3>🤖 IAmatik</h3>
+                    
+                    <div class="result-item">
+                        <div class="result-label">Faturamento Bruto</div>
+                        <div class="result-value" id="faturamento-ia">R$ 64.500</div>
+                        <div class="result-description">Vendas realizadas no mês</div>
+                        <div class="result-comparison comparison-positive">
+                            <span class="icon">↑</span>
+                            <span id="percent-faturamento">514%</span> maior
+                        </div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">(-) Custo Mensalidade IA</div>
+                        <div class="result-value" style="color: #86efac;">R$ 1.500</div>
+                        <div class="result-description">Valor fixo mensal</div>
+                        <div class="result-comparison comparison-positive">
+                            <span class="icon">↓</span>
+                            <span id="percent-custo">42%</span> menor
+                        </div>
+                    </div>
+                    
+                    <div class="result-item highlight">
+                        <div class="result-label">(=) Lucro Líquido</div>
+                        <div class="result-value" id="lucro-ia">R$ 63.000</div>
+                        <div class="result-description">Resultado final</div>
+                        <div class="result-comparison comparison-positive">
+                            <span class="icon">↑</span>
+                            <span id="percent-lucro">697%</span> maior
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Economy Section -->
+        <div class="economy-section">
+            <h2>🎯 Seu Potencial de Crescimento</h2>
+            <div class="economy-grid">
+                <div class="economy-item">
+                    <div class="economy-value" id="economia-mensal">R$ 55.100</div>
+                    <div class="economy-label">Lucro Adicional por Mês</div>
+                </div>
+                <div class="economy-item">
+                    <div class="economy-value" id="economia-anual">R$ 661.200</div>
+                    <div class="economy-label">Lucro Adicional por Ano</div>
+                </div>
+            </div>
         </div>
     </div>
-
+    
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2 class="section-title">Por que escolher a IAmatik?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🕐</div>
+                    <h3 class="benefit-title">Atendimento 24/7</h3>
+                    <p class="benefit-description">Nunca perca um cliente por falta de atendimento. Nossa IA está sempre disponível.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3 class="benefit-title">Follow-up Inteligente</h3>
+                    <p class="benefit-description">Sistema automático que nutre <span id="follow-up-count">414</span> leads não convertidos por mês.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3 class="benefit-title">Vendas Consultivas</h3>
+                    <p class="benefit-description">IA treinada especificamente para estética com técnicas avançadas de vendas.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💡</div>
+                    <h3 class="benefit-title">Conhecimento Total</h3>
+                    <p class="benefit-description">Domina todos os procedimentos e protocolos da sua clínica instantaneamente.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3 class="benefit-title">Custo Fixo</h3>
+                    <p class="benefit-description">Sem surpresas com férias, faltas, horas extras ou benefícios adicionais.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚀</div>
+                    <h3 class="benefit-title">Escala Infinita</h3>
+                    <p class="benefit-description">Atenda 10 ou 1000 clientes simultaneamente sem aumentar custos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <form action="https://webhook.dev.luminarisepro.com/pagina-estetica" method="POST" id="lead-form">
+            <input type="hidden" name="economia_mensal" id="hidden-economia-mensal">
+            <input type="hidden" name="economia_anual" id="hidden-economia-anual">
+            <input type="hidden" name="contatos_mes" id="hidden-contatos">
+            <input type="hidden" name="agendamentos_ia" id="hidden-agendamentos-ia">
+            <input type="hidden" name="agendamentos_tradicional" id="hidden-agendamentos-trad">
+            <button type="submit" class="cta-button">
+                Quero Transformar Minha Clínica
+            </button>
+        </form>
+    </section>
+    
     <script>
-        let isUpdating = false;
-
-        async function updateStock() {
-            if (isUpdating) return;
-            
-            isUpdating = true;
-            const btn = document.getElementById('updateBtn');
-            const btnText = document.getElementById('btnText');
-            
-            // Desabilita o botão e mostra loading
-            btn.disabled = true;
-            btnText.innerHTML = '<span class="spinner"></span>Processando...';
-            
-            try {
-                // Faz POST para o webhook de atualização
-                const response = await fetch('https://webhook.dev.luminarisepro.com/webhook/atualiza-estoque', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        action: 'update_stock',
-                        timestamp: new Date().toISOString()
-                    })
-                });
-                
-                if (response.ok) {
-                    // Mostra o modal de sucesso
-                    document.getElementById('modal').style.display = 'block';
-                    btnText.textContent = 'Atualizar Estoque';
-                    
-                    // Reabilita o botão após 5 minutos
-                    setTimeout(() => {
-                        btn.disabled = false;
-                        isUpdating = false;
-                    }, 300000);
-                } else {
-                    throw new Error('Erro no servidor');
-                }
-                
-            } catch (error) {
-                console.error('Erro:', error);
-                alert('❌ Erro ao iniciar atualização. Por favor, tente novamente.');
-                btn.disabled = false;
-                btnText.textContent = 'Atualizar Estoque';
-                isUpdating = false;
-            }
+        function formatCurrency(value) {
+            return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         }
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        // Fecha o modal ao clicar fora dele
-        window.onclick = function(event) {
-            const modal = document.getElementById('modal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        // Adiciona data/hora atual ao carregar a página
-        document.addEventListener('DOMContentLoaded', function() {
-            const lastUpdate = document.querySelector('.last-update');
-            const now = new Date();
-            const timeString = now.toLocaleString('pt-BR', { 
-                timeZone: 'America/Sao_Paulo',
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+        
+        function calcular() {
+            // Inputs
+            const contatos = parseInt(document.getElementById('contatos').value) || 0;
+            const numAtendentes = parseInt(document.getElementById('atendentes').value) || 1;
+            const valorAgendamento = parseFloat(document.getElementById('valor-agendamento').value) || 0;
+            const valorProcedimento = parseFloat(document.getElementById('valor-procedimento').value) || 0;
+            const taxaFechamento = parseFloat(document.getElementById('taxa-fechamento').value) || 50;
+            const custoAtendente = parseFloat(document.getElementById('custo-atendente').value) || 0;
+            const custoIA = parseFloat(document.getElementById('custo-ia').value) || 0;
             
-            lastUpdate.innerHTML += `<br><small>Página carregada em: ${timeString}</small>`;
-        });
+            // Cálculos Atendente Tradicional
+            const contatosAquecidosTrad = Math.floor(contatos * 0.1); // 10% dos contatos
+            const agendamentosTrad = Math.floor(contatosAquecidosTrad * 0.28); // 28% de conversão
+            const vendasTrad = Math.floor(agendamentosTrad * (taxaFechamento / 100));
+            const faturamentoAgendamentosTrad = agendamentosTrad * valorAgendamento;
+            const faturamentoProcedimentosTrad = vendasTrad * valorProcedimento;
+            const faturamentoTrad = faturamentoAgendamentosTrad + faturamentoProcedimentosTrad;
+            const custoTotalAtendentes = custoAtendente * numAtendentes;
+            const lucroTrad = faturamentoTrad - custoTotalAtendentes;
+            
+            // Cálculos IA
+            const contatosAquecidosIA = Math.floor(contatos * 0.6); // 60% dos contatos
+            const agendamentosIA = Math.floor(contatosAquecidosIA * 0.287); // 28.7% de conversão
+            const vendasIA = Math.floor(agendamentosIA * (taxaFechamento / 100));
+            const faturamentoAgendamentosIA = agendamentosIA * valorAgendamento;
+            const faturamentoProcedimentosIA = vendasIA * valorProcedimento;
+            const faturamentoIA = faturamentoAgendamentosIA + faturamentoProcedimentosIA;
+            const lucroIA = faturamentoIA - custoIA;
+            
+            // Economia
+            const economiaMensal = lucroIA - lucroTrad;
+            const economiaAnual = economiaMensal * 12;
+            
+            // Follow-up
+            const followUpCount = contatos - agendamentosIA;
+            
+            // Calcular porcentagens
+            const percentFaturamento = faturamentoTrad > 0 ? Math.round(((faturamentoIA - faturamentoTrad) / faturamentoTrad) * 100) : 0;
+            const percentCusto = custoTotalAtendentes > 0 ? Math.round(((custoTotalAtendentes - custoIA) / custoTotalAtendentes) * 100) : 0;
+            const percentLucro = lucroTrad > 0 ? Math.round(((lucroIA - lucroTrad) / lucroTrad) * 100) : 0;
+            
+            // Calcular taxas de conversão
+            const taxaConversaoTrad = contatos > 0 ? ((agendamentosTrad / contatos) * 100).toFixed(1) : 0;
+            const taxaConversaoIA = contatos > 0 ? ((agendamentosIA / contatos) * 100).toFixed(1) : 0;
+            
+            // Atualizar DOM
+            document.getElementById('total-contatos-trad').textContent = contatos.toLocaleString('pt-BR');
+            document.getElementById('total-contatos-ia').textContent = contatos.toLocaleString('pt-BR');
+            document.getElementById('contatos-aquecidos-trad').textContent = contatosAquecidosTrad.toLocaleString('pt-BR');
+            document.getElementById('contatos-aquecidos-ia').textContent = contatosAquecidosIA.toLocaleString('pt-BR');
+            document.getElementById('agendamentos-trad').textContent = agendamentosTrad;
+            document.getElementById('agendamentos-ia').textContent = agendamentosIA;
+            document.getElementById('vendas-trad').textContent = vendasTrad;
+            document.getElementById('vendas-ia').textContent = vendasIA;
+            document.getElementById('taxa-conversao-trad').textContent = taxaConversaoTrad.replace('.', ',') + '%';
+            document.getElementById('taxa-conversao-ia').textContent = taxaConversaoIA.replace('.', ',') + '%';
+            
+            document.getElementById('faturamento-trad').textContent = formatCurrency(faturamentoTrad);
+            document.getElementById('faturamento-ia').textContent = formatCurrency(faturamentoIA);
+            document.getElementById('custo-trad').textContent = formatCurrency(custoTotalAtendentes);
+            document.getElementById('lucro-trad').textContent = formatCurrency(lucroTrad);
+            document.getElementById('lucro-ia').textContent = formatCurrency(lucroIA);
+            document.getElementById('economia-mensal').textContent = formatCurrency(economiaMensal);
+            document.getElementById('economia-anual').textContent = formatCurrency(economiaAnual);
+            document.getElementById('follow-up-count').textContent = followUpCount;
+            
+            document.getElementById('percent-faturamento').textContent = percentFaturamento + '%';
+            document.getElementById('percent-custo').textContent = percentCusto + '%';
+            document.getElementById('percent-lucro').textContent = percentLucro + '%';
+            
+            // Atualizar campos hidden do formulário
+            document.getElementById('hidden-economia-mensal').value = economiaMensal;
+            document.getElementById('hidden-economia-anual').value = economiaAnual;
+            document.getElementById('hidden-contatos').value = contatos;
+            document.getElementById('hidden-agendamentos-ia').value = agendamentosIA;
+            document.getElementById('hidden-agendamentos-trad').value = agendamentosTrad;
+        }
+        
+        // Event listeners
+        document.getElementById('contatos').addEventListener('input', calcular);
+        document.getElementById('atendentes').addEventListener('input', calcular);
+        document.getElementById('valor-agendamento').addEventListener('input', calcular);
+        document.getElementById('valor-procedimento').addEventListener('input', calcular);
+        document.getElementById('custo-atendente').addEventListener('input', calcular);
+        
+        // Calcular ao carregar
+        calcular();
     </script>
 </body>
-</html>
+</html>`;
+
+return [{ html: html }];
